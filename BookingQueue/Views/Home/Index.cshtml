@@ -1,0 +1,63 @@
+﻿@using AspNetCore.ReCaptcha
+@{
+    ViewData["Title"] = "Система предварительной записи ГНС КР";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="text-center">
+    <h1 class="display-4">Система предварительной записи ГНС КР</h1>
+</div>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "mt-5" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <p class="mt-5 mb-3 text-center">Для начала процесса записи заполните форму, представленную ниже. Поля, отмеченные звездочкой (*) являются обязательными.</p>
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <div class="w-100">
+                    <label>
+                        <span class="d-inline">
+                            Имя
+                            <div class="ml-1 d-inline bo-pdf__hint"></div>
+                            <div class="d-inline text-danger">*</div>
+                        </span>
+                    </label>
+                    <div class="bs-custom-control w-100 d-flex flex-wrap align-items-center">
+                        <div class="w-100">
+                            <input class="form-control" type="text" name="name" required/>
+                             @Html.ValidationMessage("name", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <div class="w-100">
+                    <label>
+                        <span class="d-inline">
+                            Номер телефона
+                            <div class="ml-1 d-inline bo-pdf__hint"></div>
+                            <div class="d-inline text-danger">*</div>
+                        </span>
+                    </label>
+                    <div class="bs-custom-control w-100 d-flex flex-wrap align-items-center">
+                        <div class="w-100">
+                            <input class="form-control" type="text" name="phone" required/>
+                            @Html.ValidationMessage("phone", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mt-3">
+            @Html.ValidationMessage("Recaptcha", "", new { @class = "text-danger" })
+            @Html.ReCaptcha()
+            <button type="submit" class="btn btn-primary mt-3">Далее</button>
+        </div>
+    </div>
+}
