@@ -19,6 +19,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 builder.Services.AddRazorPages();
+builder.Services.AddMvc();
+builder.Services.AddDirectoryBrowser();
 
 var app = builder.Build();
 
