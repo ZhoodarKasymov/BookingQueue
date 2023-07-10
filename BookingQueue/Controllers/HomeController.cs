@@ -1,16 +1,20 @@
 ﻿using AspNetCore.ReCaptcha;
+using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.Common.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookingQueue.Controllers;
 
 public class HomeController : Controller
 {
     private readonly IWebHostEnvironment _hostEnvironment;
+    private readonly IServicesService _servicesService;
 
-    public HomeController(IWebHostEnvironment hostEnvironment)
+    public HomeController(IWebHostEnvironment hostEnvironment, IServicesService servicesService)
     {
         _hostEnvironment = hostEnvironment;
+        _servicesService = servicesService;
     }
 
     public IActionResult Index()
@@ -27,8 +31,17 @@ public class HomeController : Controller
         if (!ModelState.IsValid)
             return View(bookViewModel);
         
+        return RedirectToAction("SelectServices", bookViewModel);
+    }
+
+    public async Task<IActionResult> SelectServices(BookViewModel bookViewModel)
+    {
+        var activeServices = await _servicesService.GetAllActiveAsync();
+        ViewData["Services"] = activeServices.Select(s => new SelectListItem(s.Name, s.Id.ToString()));
         return View(bookViewModel);
     }
+    
+    
 
     public IActionResult Privacy()
     {

@@ -4,31 +4,77 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"]</title>
+    <link rel="icon" href="~/images/logo 1.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/BookingQueue.styles.css" asp-append-version="true"/>
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ГНС КР</a>
-            <div id="google_translate_element"></div>
+    <nav class="navbar first-gns-nav">
+        <div class="container">
+            <a class="navbar-brand p-0 m-0" href="/">
+                <img src="~/images/logo 1.png" width="80" height="80" class="d-inline-block align-top" alt="">
+                <p class="text-nav-gns-brand">Государственная налоговая служба при министерстве финансов Кыргызской Республики</p>
+            </a>
+            <div class="d-flex">
+                <a class="nav-item nav-link lang-link notranslate" id="kyr-lang" onclick="ChangeLanguageToKyr()">Кыр</a>
+                <a class="nav-item nav-link lang-link notranslate" id="rus-lang" onclick="ChangeLanguageToRu()">Рус</a>
+            </div>
+            <div id="google_translate_element" class="d-none"></div>
+        </div>
+    </nav>
+    <nav class="navbar second-gns-nav w-100">
+        <div class="container justify-content-start">
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%B1%D0%B0%D0%B7%D0%B0-%D0%B7%D0%BD%D0%B0%D0%BD%D0%B8%D0%B9">База знаний</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D1%84%D0%BE%D1%80%D0%BC%D1%8B-%D0%BE%D1%82%D1%87%D0%B5%D1%82%D0%BE%D0%B2">Формы отчётов</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B">Электронные сервисы</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%BE-%D0%BD%D0%B0%D0%BB%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D0%B9-%D1%81%D0%BB%D1%83%D0%B6%D0%B1%D0%B5">О налоговой службе</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D1%8B">Контакты</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%B2%D0%B0%D0%BA%D0%B0%D0%BD%D1%81%D0%B8%D0%B8">Вакансии</a>
+        </div>
+    </nav>
+    <nav class="navbar third-gns-nav w-100">
+        <div class="container justify-content-start position-relative">
+            <span class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 18V16H21V18H3ZM3 13V11H21V13H3ZM3 8V6H21V8H3Z" fill="#5A5956"/>
+                </svg>
+            </span>
+            <a class="nav-item nav-link gns-nav-link gns-nav-link-third" href="https://www.sti.gov.kg/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0">Главная страница</a>
+            /
+            <a class="nav-item nav-link gns-nav-link gns-nav-link-third" href="#">@ViewData["Title"]</a>
+
+            <a class="email-request position-absolute" href="https://www.sti.gov.kg/e-mail">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <g clip-path="url(#clip0_1026_939)">
+                        <path d="M22 7.53125V16.9963C22 17.7615 21.7077 18.4978 21.1827 19.0545C20.6578 19.6113 19.9399 19.9464 19.176 19.9913L19 19.9963H5C4.23479 19.9963 3.49849 19.7039 2.94174 19.179C2.38499 18.654 2.04989 17.9361 2.005 17.1723L2 16.9963V7.53125L11.445 13.8282L11.561 13.8942C11.6977 13.961 11.8478 13.9958 12 13.9958C12.1522 13.9958 12.3023 13.961 12.439 13.8942L12.555 13.8282L22 7.53125Z" fill="#0E9298"/>
+                        <path d="M19.0003 4C20.0803 4 21.0273 4.57 21.5553 5.427L12.0003 11.797L2.44531 5.427C2.69604 5.01977 3.04053 4.6784 3.45002 4.43138C3.85951 4.18436 4.32214 4.03886 4.79931 4.007L5.00031 4H19.0003Z" fill="#0E9298"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_1026_939">
+                            <rect width="24" height="24" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+                Электронное обращение
+            </a>
         </div>
     </nav>
 </header>
 
-<div class="container">
+<div class="container body-container">
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 </div>
 
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; @DateTime.Now.Year - ГНС КР
-    </div>
-</footer>
+@* <footer class="border-top footer fixed-bottom text-muted bg-light"> *@
+@*     <div class="container"> *@
+@*         &copy;@DateTime.Now.Year - ГНС КР *@
+@*     </div> *@
+@* </footer> *@
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/jquery.inputmask.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

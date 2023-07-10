@@ -20,7 +20,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public async Task<TEntity> GetByIdAsync(int id)
     {
-        var query = $"SELECT * FROM {typeof(TEntity).Name} WHERE Id = @Id";
+        var query = $"SELECT * FROM {typeof(TEntity).Name} WHERE id = @Id";
         return await _db.QueryFirstOrDefaultAsync<TEntity>(query, new { Id = id });
     }
 
@@ -39,7 +39,7 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     public async Task<bool> DeleteAsync(int id)
     {
-        string query = $"DELETE FROM {typeof(TEntity).Name} WHERE Id = @Id";
+        string query = $"DELETE FROM {typeof(TEntity).Name} WHERE id = @Id";
         int rowsAffected = await _db.ExecuteAsync(query, new { Id = id });
         return rowsAffected > 0;
     }

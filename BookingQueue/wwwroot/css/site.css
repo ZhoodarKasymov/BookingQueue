@@ -1,11 +1,26 @@
 html {
   font-size: 14px;
+  font-family: 'Roboto', sans-serif;
 }
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -19,4 +34,121 @@ html {
 
 body {
   margin-bottom: 60px;
+  top: 0px !important;
+}
+
+.gns-brand {
+  width: 80px;
+  height: 80px;
+  background: url('../images/logo 1.png'),no-repeat;
+  display: flex;
+  align-items: center;
+}
+
+.text-nav-gns-brand {
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.second-gns-nav {
+  height: 100px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0C959B 0%, #109197 100%);
+}
+
+.gns-nav-link {
+  padding: 1px 6px;
+  color: #FFF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.gns-nav-link:hover{
+  color: #000;
+  background: #fff;
+  text-decoration: none;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.navbar-brand p {
+  margin: 0;
+}
+
+.third-gns-nav {
+  height: 60px;
+  flex-shrink: 0;
+  background: #EEE;
+}
+
+.gns-nav-link-third {
+  color: #5A5956;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+}
+
+.gns-nav-link-third:hover {
+  color: #000;
+  text-decoration-line: underline;
+  background: #EEE;
+}
+
+.first-gns-nav {
+  height: 90px;
+}
+
+.body-container {
+  margin-top: 80px;
+}
+
+.email-request {
+  right: 0;
+  color: #0F9197;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  text-decoration-line: none;
+}
+
+.email-request:hover {
+  color: #0F9197;
+}
+
+.goog-te-gadget img{
+  display:none !important;
+}
+
+body > .skiptranslate {
+  display: none !important;
+}
+
+.lang-link {
+  color: #859999 !important;
+  font-size: 13px;
+  padding: 0 !important;
+  padding-left: 10px !important;
+  cursor: pointer;
+}
+
+.lang-link-active {
+  text-decoration-line: underline;
 }

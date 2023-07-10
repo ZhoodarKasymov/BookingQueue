@@ -1,0 +1,23 @@
+﻿@model BookingQueue.Common.Models.ViewModels.BookViewModel
+
+@{
+    ViewData["Title"] = "Предоставляемые услуги";
+}
+
+<div>
+    <h4><bold>@ViewData["Title"]</bold></h4>
+</div>
+
+<form asp-controller="Home" asp-action="Index" method="post" class="row g-3 needs-validation" novalidate>
+    
+</form>
+
+<div class="row">
+    <hr>
+    <div class="col-12">
+        @Html.DropDownListFor(m => m.ServiceId,
+            (IEnumerable<SelectListItem>)ViewData["Services"]!,
+            "Выберите услугу",
+            new { @class = "form-control" })
+    </div>
+</div>

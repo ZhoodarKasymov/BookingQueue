@@ -1,22 +1,29 @@
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Net;
 using AspNetCore.ReCaptcha;
+using BookingQueue.BLL.Services;
+using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.DAL.GenericRepository;
 using log4net;
 using log4net.Config;
 using Microsoft.AspNetCore.Diagnostics;
+using MySql.Data.MySqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure your database connection
-builder.Services.AddScoped<IDbConnection>(c => new SqlConnection(builder.Configuration["ConnectionStrings:DefaultConnection"]));
+builder.Services.AddScoped<IDbConnection>(c => {
+    var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+    return new MySqlConnection(connectionString);
+});
+
 builder.Services.AddReCaptcha(builder.Configuration.GetSection("GoogleReCaptcha"));
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddTransient<IServicesService, ServicesService>();
+builder.Services.AddTransient<IAdvanceService, AdvanceService>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddMvc();

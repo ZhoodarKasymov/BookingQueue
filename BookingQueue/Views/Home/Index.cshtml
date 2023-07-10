@@ -6,19 +6,20 @@
     ViewData["Title"] = "Система предварительной записи ГНС КР";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Система предварительной записи ГНС КР</h1>
+<div>
+    <h4><bold>@ViewData["Title"]</bold></h4>
 </div>
 
 <form asp-controller="Home" asp-action="Index" method="post" class="row g-3 needs-validation" novalidate>
     @Html.AntiForgeryToken()
 
-    <p class="mt-5 mb-3 text-center">Для начала процесса записи заполните форму, представленную ниже. Поля, отмеченные звездочкой (*) являются обязательными.</p>
+    <p class="mb-3">Для начала процесса записи заполните форму, представленную ниже. Поля, отмеченные звездочкой (*) являются обязательными.</p>
+    <hr>
     <div class="col-12 col-md-6">
         <div class="form-group">
             <div class="w-100">
                 <label>
-                    <span class="d-inline">
+                    <span class="d-inline fw-bold">
                         Имя
                         <div class="d-inline text-danger">*</div>
                     </span>
@@ -38,7 +39,7 @@
         <div class="form-group">
             <div class="w-100">
                 <label>
-                    <span class="d-inline">
+                    <span class="d-inline fw-bold">
                         Номер телефона
                         <div class="d-inline text-danger">*</div>
                     </span>

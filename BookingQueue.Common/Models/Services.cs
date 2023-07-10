@@ -15,5 +15,5 @@ public class Services
     public string? ServicePrefix { get; set; }
 
     [Column("deleted")]
-    public DateOnly? Deleted { get; set; }
+    public DateTime? Deleted { get; set; }
 }
