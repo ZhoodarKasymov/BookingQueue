@@ -17,9 +17,9 @@ public class AdvanceService : IAdvanceService
         _repository = repository;
     }
 
-    public async Task<string> BookTimeAsync(BookViewModel bookViewModel)
+    public async Task<string> BookTimeAsync(BookViewModel bookViewModel, int maxClients)
     {
-        await CheckAdvanceDateTimeAsync(bookViewModel.BookingDate);
+        await CheckAdvanceDateTimeAsync(bookViewModel.BookingDate, bookViewModel.ServiceId);
 
         var uniqueNumber = await GenerateUniqueIDAsync();
 
@@ -32,15 +32,18 @@ public class AdvanceService : IAdvanceService
             ServiceId = bookViewModel.ServiceId
         });
 
+        if (result == 0)
+            throw new Exception("Что-то пошло не так, очередь не сохранен.");
+
         return uniqueNumber.ToString();
     }
 
     #region Private Methods
 
-    private async Task CheckAdvanceDateTimeAsync(DateTime? date)
+    private async Task CheckAdvanceDateTimeAsync(DateTime? date, long? serviceId)
     {
-        var query = $"SELECT COUNT(*) FROM {typeof(Advance).Name} WHERE advance_time = @DateTime";
-        var count = await _db.ExecuteScalarAsync<int>(query, new { DateTime = date });
+        var query = $"SELECT COUNT(*) FROM {typeof(Advance).Name} WHERE advance_time = @DateTime && service_id = @ServiveId";
+        var count = await _db.ExecuteScalarAsync<int>(query, new { DateTime = date, ServiveId =  serviceId});
         
         if (count > 10)
             throw new Exception("Нет свободного места, выберите другое время!");

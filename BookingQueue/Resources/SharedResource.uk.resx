@@ -18,6 +18,64 @@
         <value>Телефон номери</value>
     </data>
     <data name="Header_title" xml:space="preserve">
-        <value>Кыргыз Республикасынын финансы министрлигине караштуу мамлекеттик салык кызматы</value>
+        <value>Кыргыз Республикасынын Финансы министрлигине караштуу
+Мамлекеттик салык кызматы</value>
+    </data>
+    <data name="Header_link_1" xml:space="preserve">
+        <value>Билим базасы</value>
+    </data>
+    <data name="Header_link_2" xml:space="preserve">
+        <value>Отчеттун формалары</value>
+    </data>
+    <data name="Header_link_3" xml:space="preserve">
+        <value>Электрондук сервистер</value>
+    </data>
+    <data name="Header_link_4" xml:space="preserve">
+        <value>Салык кызматы жөнүндө</value>
+    </data>
+    <data name="Header_link_5" xml:space="preserve">
+        <value>Байланыштар</value>
+    </data>
+    <data name="Header_link_6" xml:space="preserve">
+        <value>Бош орундар</value>
+    </data>
+    <data name="Header_path_link" xml:space="preserve">
+        <value>  Башкы бет</value>
+    </data>
+    <data name="Email_request" xml:space="preserve">
+        <value>Электрондук кайрылуу</value>
+    </data>
+    <data name="HomePage_title" xml:space="preserve">
+        <value>КР МСКнын алдын ала каттоо системасы</value>
+    </data>
+    <data name="HomePage_description" xml:space="preserve">
+        <value>Жазуу процессин баштоо үчүн төмөндөгү форманы толтуруңуз. Жылдызча (*) менен белгиленген талаалар милдеттүү болуп саналат.</value>
+    </data>
+    <data name="Validation_cant_be_empty" xml:space="preserve">
+        <value>{0} бош болушу мүмкүн эмес.</value>
+    </data>
+    <data name="Agree" xml:space="preserve">
+        <value>Макулмун</value>
+    </data>
+    <data name="WithPrivacy" xml:space="preserve">
+        <value>шарттар менен</value>
+    </data>
+    <data name="Privacy_text" xml:space="preserve">
+        <value>Улантуудан мурун шарттарды кабыл алыңыз.</value>
+    </data>
+    <data name="Next" xml:space="preserve">
+        <value>Улантуу</value>
+    </data>
+    <data name="Services" xml:space="preserve">
+        <value>Көрсөтүлгөн кызматтар</value>
+    </data>
+    <data name="ChooseServices" xml:space="preserve">
+        <value>Кызматты тандаңыз</value>
+    </data>
+    <data name="ChooseDateTime" xml:space="preserve">
+        <value>Күндү жана убакытты тандаңыз</value>
+    </data>
+    <data name="BookingBtn" xml:space="preserve">
+        <value>Кезекке туруу</value>
     </data>
 </root>

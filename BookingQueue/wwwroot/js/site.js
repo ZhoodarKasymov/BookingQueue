@@ -42,5 +42,19 @@ function getCookie(name) {
 })();
 
 $(document).ready(function () {
-    $('.phone-input').inputmask('+996 (999) 99-99-99');
+    $('.phone-input').inputmask("+\\9\\96 (999) 99-99-99");
+    
+    $(document).ready(function() {
+        var today = new Date().toISOString().split('T')[0];
+        $('#gns_date').attr('min', today);
+    });
+
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    if (minutes < 10) {
+        minutes = '0' + minutes;
+    }
+    var currentTime = hours + ':' + minutes;
+    $('#gns_time').attr('min', currentTime);
 });

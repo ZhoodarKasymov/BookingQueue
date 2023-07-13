@@ -44,6 +44,11 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         return rowsAffected > 0;
     }
 
+    public async Task<IEnumerable<T>> QueryDynamicAsync<T>(string query)
+    {
+        return await _db.QueryAsync<T>(query);
+    }
+
     #region Private methods
 
     private string GenerateInsertQuery()

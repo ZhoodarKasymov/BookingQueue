@@ -1,23 +1,52 @@
-﻿@model BookingQueue.Common.Models.ViewModels.BookViewModel
-
-@{
-    ViewData["Title"] = "Предоставляемые услуги";
+﻿@{
+    ViewData["Title"] = Localization.GetLocalizedString("Services");
 }
 
-<div>
-    <h4><bold>@ViewData["Title"]</bold></h4>
+<div class="mb-3">
+    <h4>
+        <bold>@ViewData["Title"]</bold>
+    </h4>
 </div>
+<hr>
 
-<form asp-controller="Home" asp-action="Index" method="post" class="row g-3 needs-validation" novalidate>
-    
-</form>
+<form class="g-3 needs-validation mt-3" novalidate>
+    <h5 class="mt-5">
+        <bold>@Localization.GetLocalizedString("ChooseServices")</bold>
+    </h5>
 
-<div class="row">
-    <hr>
-    <div class="col-12">
-        @Html.DropDownListFor(m => m.ServiceId,
-            (IEnumerable<SelectListItem>)ViewData["Services"]!,
-            "Выберите услугу",
-            new { @class = "form-control" })
+    <div class="row">
+        @foreach (var service in (IEnumerable<SelectListItem>)ViewData["Services"]!)
+        {
+            <div class="mt-3 col-12 col-md-4" data-id="@service.Value">
+                <div class="service_card p-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="#0C949A"/>
+                    </svg>
+                    @service.Text
+                </div>
+            </div>
+        }
     </div>
-</div>
+
+    <h5 class="mt-5 mb-2">
+        <bold>@Localization.GetLocalizedString("ChooseDateTime")</bold>
+    </h5>
+
+    <div class="row">
+        <div class="col-12 col-md-4 mt-3">
+            <input type="date" id="gns_date" class="p-4 date-time">
+        </div>
+
+        <div class="col-12 col-md-4 mt-3">
+            <input type="time" id="gns_time" class="p-4 date-time">
+        </div>
+    </div>
+    
+    <hr class="mt-5 mb-5">
+
+    <div class="row">
+        <div class="col-12 col-md-4 mt-3">
+            <button class="btn custom_button_gns">@Localization.GetLocalizedString("BookingBtn")</button>
+        </div>
+    </div>
+</form>

@@ -12,12 +12,69 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="Name" xml:space="preserve">
-        <value>Имя</value>
+        <value />
     </data>
     <data name="Phone" xml:space="preserve">
         <value />
     </data>
     <data name="Header_title" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Header_link_1" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Header_link_2" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Header_link_3" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Header_link_4" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Header_link_5" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Header_link_6" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Header_path_link" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Email_request" xml:space="preserve">
+        <value />
+    </data>
+    <data name="HomePage_title" xml:space="preserve">
+        <value />
+    </data>
+    <data name="HomePage_description" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Validation_cant_be_empty" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Agree" xml:space="preserve">
+        <value />
+    </data>
+    <data name="WithPrivacy" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Privacy_text" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Next" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Services" xml:space="preserve">
+        <value />
+    </data>
+    <data name="ChooseServices" xml:space="preserve">
+        <value />
+    </data>
+    <data name="ChooseDateTime" xml:space="preserve">
+        <value />
+    </data>
+    <data name="BookingBtn" xml:space="preserve">
         <value />
     </data>
 </root>

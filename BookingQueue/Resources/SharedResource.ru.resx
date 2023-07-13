@@ -25,6 +25,64 @@
         <value>Номер телефона</value>
     </data>
     <data name="Header_title" xml:space="preserve">
-        <value>Государственная налоговая служба при министерстве финансов Кыргызской Республики</value>
+        <value>Государственная налоговая служба при Министерстве финансов Кыргызской Республики</value>
+    </data>
+    <data name="Header_link_1" xml:space="preserve">
+        <value>База знаний</value>
+    </data>
+    <data name="Header_link_2" xml:space="preserve">
+        <value>Формы отчетов</value>
+    </data>
+    <data name="Header_link_3" xml:space="preserve">
+        <value>Электронные сервисы</value>
+    </data>
+    <data name="Header_link_4" xml:space="preserve">
+        <value>О налоговой службе</value>
+    </data>
+    <data name="Header_link_5" xml:space="preserve">
+        <value>Контакты
+</value>
+    </data>
+    <data name="Header_link_6" xml:space="preserve">
+        <value>Вакансии</value>
+    </data>
+    <data name="Header_path_link" xml:space="preserve">
+        <value>Главная страница</value>
+    </data>
+    <data name="Email_request" xml:space="preserve">
+        <value>Электронное обращение</value>
+    </data>
+    <data name="HomePage_title" xml:space="preserve">
+        <value>Система предварительной записи ГНС КР</value>
+    </data>
+    <data name="HomePage_description" xml:space="preserve">
+        <value>Для начала процесса записи заполните форму, представленную ниже. Поля, отмеченные звездочкой (*) являются обязательными.</value>
+    </data>
+    <data name="Validation_cant_be_empty" xml:space="preserve">
+        <value>{0} не может быть пустым.</value>
+    </data>
+    <data name="Agree" xml:space="preserve">
+        <value>Согласен с</value>
+    </data>
+    <data name="WithPrivacy" xml:space="preserve">
+        <value>условиями</value>
+    </data>
+    <data name="Privacy_text" xml:space="preserve">
+        <value>Пожалуйста, примите условия, прежде чем продолжить.</value>
+    </data>
+    <data name="Next" xml:space="preserve">
+        <value>Далее</value>
+    </data>
+    <data name="Services" xml:space="preserve">
+        <value>Предоставляемые услуги</value>
+    </data>
+    <data name="ChooseServices" xml:space="preserve">
+        <value>Выберите услугу</value>
+    </data>
+    <data name="ChooseDateTime" xml:space="preserve">
+        <value>Выберите дату и время</value>
+    </data>
+    <data name="BookingBtn" xml:space="preserve">
+        <value>Встать в очередь</value>
     </data>
 </root>

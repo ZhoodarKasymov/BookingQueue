@@ -14,7 +14,11 @@ public class ServicesService : IServicesService
 
     public async Task<ICollection<Common.Models.Services>> GetAllActiveAsync()
     {
-        var result = (await _genericRepository.GetAllAsync()).Where(s => s.Deleted is null && s.Id != 1);
-        return result.ToList();
+        var query = @"SELECT s.id, s.name, sl.name as 'TranslatedName', s.deleted, sl.lang FROM services_langs sl
+                        RIGHT JOIN services s ON s.id = sl.services_id
+                        WHERE s.deleted IS NULL && sl.lang = 'kz_KZ'";
+
+        var services = await _genericRepository.QueryDynamicAsync<Common.Models.Services>(query);
+        return services.ToList();
     }
 }

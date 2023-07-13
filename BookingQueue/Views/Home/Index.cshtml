@@ -3,7 +3,7 @@
 @model BookingQueue.Common.Models.ViewModels.BookViewModel
 
 @{
-    ViewData["Title"] = "Система предварительной записи ГНС КР";
+    ViewData["Title"] = Localization.GetLocalizedString("HomePage_title");
 }
 
 <div>
@@ -13,7 +13,7 @@
 <form asp-controller="Home" asp-action="Index" method="post" class="row g-3 needs-validation" novalidate>
     @Html.AntiForgeryToken()
 
-    <p class="mb-3">Для начала процесса записи заполните форму, представленную ниже. Поля, отмеченные звездочкой (*) являются обязательными.</p>
+    <p class="mb-3">@Localization.GetLocalizedString("HomePage_description")</p>
     <hr>
     <div class="col-12 col-md-6">
         <div class="form-group">
@@ -27,7 +27,7 @@
                 <div class="bs-custom-control w-100 d-flex flex-wrap align-items-center">
                     <div class="w-100">
                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required="required" })
-                        <div class="invalid-feedback">Имя не может быть пустым.</div>
+                        <div class="invalid-feedback">@(string.Format(Localization.GetLocalizedString("Validation_cant_be_empty"), Localization.GetLocalizedString("Name")))</div>
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="bs-custom-control w-100 d-flex flex-wrap align-items-center">
                     <div class="w-100">
                         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control phone-input", required="required" })
-                        <div class="invalid-feedback">Номер телефона не может быть пустым.</div>
+                        <div class="invalid-feedback">@(string.Format(Localization.GetLocalizedString("Validation_cant_be_empty"), Localization.GetLocalizedString("Phone")))</div>
                         @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -59,10 +59,10 @@
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
             <label class="form-check-label" for="invalidCheck">
-                Согласен с <a asp-area="" asp-controller="Home" asp-action="Privacy" target="_blank">условиями</a>
+                @Localization.GetLocalizedString("Agree") <a asp-area="" asp-controller="Home" asp-action="Privacy" target="_blank">@Localization.GetLocalizedString("WithPrivacy")</a>
             </label>
             <div class="invalid-feedback">
-                Пожалуйста, примите условия, прежде чем продолжить.
+                @Localization.GetLocalizedString("Privacy_text")
             </div>
         </div>
     </div>
@@ -71,6 +71,6 @@
         @Html.ValidationMessage("Recaptcha", "", new { @class = "text-danger" })
         @Html.ReCaptcha()
 
-        <button type="submit" class="btn btn-primary mt-3">Далее</button>
+        <button type="submit" class="btn btn-primary mt-3">@Localization.GetLocalizedString("Next")</button>
     </div>
 </form>

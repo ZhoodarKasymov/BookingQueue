@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -27,12 +25,12 @@
     </nav>
     <nav class="navbar second-gns-nav w-100">
         <div class="container justify-content-start">
-            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%B1%D0%B0%D0%B7%D0%B0-%D0%B7%D0%BD%D0%B0%D0%BD%D0%B8%D0%B9">База знаний</a>
-            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D1%84%D0%BE%D1%80%D0%BC%D1%8B-%D0%BE%D1%82%D1%87%D0%B5%D1%82%D0%BE%D0%B2">Формы отчётов</a>
-            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B">Электронные сервисы</a>
-            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%BE-%D0%BD%D0%B0%D0%BB%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D0%B9-%D1%81%D0%BB%D1%83%D0%B6%D0%B1%D0%B5">О налоговой службе</a>
-            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D1%8B">Контакты</a>
-            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%B2%D0%B0%D0%BA%D0%B0%D0%BD%D1%81%D0%B8%D0%B8">Вакансии</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%B1%D0%B0%D0%B7%D0%B0-%D0%B7%D0%BD%D0%B0%D0%BD%D0%B8%D0%B9">@Localization.GetLocalizedString("Header_link_1")</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D1%84%D0%BE%D1%80%D0%BC%D1%8B-%D0%BE%D1%82%D1%87%D0%B5%D1%82%D0%BE%D0%B2">@Localization.GetLocalizedString("Header_link_2")</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%BD%D1%8B%D0%B5-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D1%8B">@Localization.GetLocalizedString("Header_link_3")</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%BE-%D0%BD%D0%B0%D0%BB%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D0%B9-%D1%81%D0%BB%D1%83%D0%B6%D0%B1%D0%B5">@Localization.GetLocalizedString("Header_link_4")</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%BA%D0%BE%D0%BD%D1%82%D0%B0%D0%BA%D1%82%D1%8B">@Localization.GetLocalizedString("Header_link_5")</a>
+            <a class="nav-item nav-link gns-nav-link" href="https://www.sti.gov.kg/%D0%B2%D0%B0%D0%BA%D0%B0%D0%BD%D1%81%D0%B8%D0%B8">@Localization.GetLocalizedString("Header_link_6")</a>
         </div>
     </nav>
     <nav class="navbar third-gns-nav w-100">
@@ -42,7 +40,7 @@
                     <path d="M3 18V16H21V18H3ZM3 13V11H21V13H3ZM3 8V6H21V8H3Z" fill="#5A5956"/>
                 </svg>
             </span>
-            <a class="nav-item nav-link gns-nav-link gns-nav-link-third" href="https://www.sti.gov.kg/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0">Главная страница</a>
+            <a class="nav-item nav-link gns-nav-link gns-nav-link-third" href="https://www.sti.gov.kg/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0">@Localization.GetLocalizedString("Header_path_link")</a>
             /
             <a class="nav-item nav-link gns-nav-link gns-nav-link-third" href="#">@ViewData["Title"]</a>
 
@@ -58,23 +56,17 @@
                         </clipPath>
                     </defs>
                 </svg>
-                Электронное обращение
+                @Localization.GetLocalizedString("Email_request")
             </a>
         </div>
     </nav>
 </header>
 
 <div class="container body-container">
-    <main role="main" class="pb-3">
+    <main role="main" class="pb-5">
         @RenderBody()
     </main>
 </div>
-
-@* <footer class="border-top footer fixed-bottom text-muted bg-light"> *@
-@*     <div class="container"> *@
-@*         &copy;@DateTime.Now.Year - ГНС КР *@
-@*     </div> *@
-@* </footer> *@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/jquery.inputmask.min.js"></script>

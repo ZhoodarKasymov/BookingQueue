@@ -51,6 +51,7 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  white-space: pre-line;
 }
 
 .second-gns-nav {
@@ -133,14 +134,6 @@ body {
   color: #0F9197;
 }
 
-.goog-te-gadget img{
-  display:none !important;
-}
-
-body > .skiptranslate {
-  display: none !important;
-}
-
 .lang-link {
   color: #859999 !important;
   font-size: 13px;
@@ -151,4 +144,35 @@ body > .skiptranslate {
 
 .lang-link-active {
   text-decoration-line: underline;
+}
+
+.service_card {
+  height: 70px;
+  background: #E5F3F4;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.date-time {
+  height: 70px;
+  width: 100%;
+  background: #E5F3F4;
+  border: none;
+  border-bottom: 1px solid #0C949A;
+}
+
+.custom_button_gns {
+  color: #FFF;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  width: 100% !important;
+  height: 70px;
+  background: #0C949A;
+  border-radius: unset !important;
 }

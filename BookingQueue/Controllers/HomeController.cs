@@ -1,7 +1,8 @@
-﻿using AspNetCore.ReCaptcha;
+﻿using System.Globalization;
+using AspNetCore.ReCaptcha;
+using BookingQueue.BLL.Services;
 using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.Common.Models.ViewModels;
-using BookingQueue.Resources;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,12 +13,19 @@ public class HomeController : Controller
 {
     private readonly IWebHostEnvironment _hostEnvironment;
     private readonly IServicesService _servicesService;
+    private readonly IConfiguration _configuration;
+    private readonly IAdvanceService _advanceService;
 
-    public HomeController(IWebHostEnvironment hostEnvironment, 
-        IServicesService servicesService)
+    public HomeController(
+        IWebHostEnvironment hostEnvironment, 
+        IServicesService servicesService, 
+        IConfiguration configuration,
+        IAdvanceService advanceService)
     {
         _hostEnvironment = hostEnvironment;
         _servicesService = servicesService;
+        _configuration = configuration;
+        _advanceService = advanceService;
     }
 
     public IActionResult Index()
@@ -30,26 +38,38 @@ public class HomeController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Index(BookViewModel bookViewModel)
     {
-        // Validate the captcha response
         if (!ModelState.IsValid)
             return View(bookViewModel);
+
+        TempData["bookViewModel"] = bookViewModel;
         
-        return RedirectToAction("SelectServices", bookViewModel);
+        return RedirectToAction("SelectServices");
     }
 
-    public async Task<IActionResult> SelectServices(BookViewModel bookViewModel)
+    public async Task<IActionResult> SelectServices()
     {
+        var ci = CultureInfo.CurrentCulture.Name;
         var activeServices = await _servicesService.GetAllActiveAsync();
-        ViewData["Services"] = activeServices.Select(s => new SelectListItem(s.Name, s.Id.ToString()));
-        return View(bookViewModel);
+        ViewData["Services"] = activeServices.Select(s => new SelectListItem(ci == "uk" ? s.TranslatedName : s.Name, s.Id.ToString()));
+        return View();
+    }
+
+    public async Task<string> BookingTime(DateTime? bookingTime, long? serviceId)
+    {
+        var bookViewModel = TempData["bookViewModel"] as BookViewModel;
+        var maxUserCountOnService = _configuration.GetValue<int>("MaxClientsInService:MaxCount");
+        
+        bookViewModel.BookingDate = bookingTime;
+        bookViewModel.ServiceId = serviceId;
+        
+        var result = await _advanceService.BookTimeAsync(bookViewModel, maxUserCountOnService);
+        return result;
     }
 
     public IActionResult SetLanguage(string culture, string returnUrl)
     {
-        var cookieName = CookieRequestCultureProvider.DefaultCookieName;
-        
         Response.Cookies.Append(
-            cookieName,
+            CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
             new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
         );
