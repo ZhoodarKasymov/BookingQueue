@@ -1,6 +1,8 @@
 ﻿using AspNetCore.ReCaptcha;
 using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.Common.Models.ViewModels;
+using BookingQueue.Resources;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -11,7 +13,8 @@ public class HomeController : Controller
     private readonly IWebHostEnvironment _hostEnvironment;
     private readonly IServicesService _servicesService;
 
-    public HomeController(IWebHostEnvironment hostEnvironment, IServicesService servicesService)
+    public HomeController(IWebHostEnvironment hostEnvironment, 
+        IServicesService servicesService)
     {
         _hostEnvironment = hostEnvironment;
         _servicesService = servicesService;
@@ -40,9 +43,20 @@ public class HomeController : Controller
         ViewData["Services"] = activeServices.Select(s => new SelectListItem(s.Name, s.Id.ToString()));
         return View(bookViewModel);
     }
-    
-    
 
+    public IActionResult SetLanguage(string culture, string returnUrl)
+    {
+        var cookieName = CookieRequestCultureProvider.DefaultCookieName;
+        
+        Response.Cookies.Append(
+            cookieName,
+            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+        );
+
+        return LocalRedirect(returnUrl);
+    }
+    
     public IActionResult Privacy()
     {
         var webRootPath = _hostEnvironment.WebRootPath;

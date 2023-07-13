@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -15,13 +17,12 @@
         <div class="container">
             <a class="navbar-brand p-0 m-0" href="/">
                 <img src="~/images/logo 1.png" width="80" height="80" class="d-inline-block align-top" alt="">
-                <p class="text-nav-gns-brand">Государственная налоговая служба при министерстве финансов Кыргызской Республики</p>
+                <p class="text-nav-gns-brand">@Localization.GetLocalizedString("Header_title")</p>
             </a>
             <div class="d-flex">
-                <a class="nav-item nav-link lang-link notranslate" id="kyr-lang" onclick="ChangeLanguageToKyr()">Кыр</a>
-                <a class="nav-item nav-link lang-link notranslate" id="rus-lang" onclick="ChangeLanguageToRu()">Рус</a>
+                <a asp-controller="Home" asp-action="SetLanguage" asp-route-culture="uk" asp-route-returnUrl="@Context.Request.Path" class="nav-item nav-link lang-link notranslate" id="kyr-lang">Кыр</a>
+                <a asp-controller="Home" asp-action="SetLanguage" asp-route-culture="ru" asp-route-returnUrl="@Context.Request.Path" class="nav-item nav-link lang-link notranslate" id="rus-lang">Рус</a>
             </div>
-            <div id="google_translate_element" class="d-none"></div>
         </div>
     </nav>
     <nav class="navbar second-gns-nav w-100">
@@ -78,7 +79,6 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/jquery.inputmask.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>

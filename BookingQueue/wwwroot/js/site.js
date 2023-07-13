@@ -14,34 +14,15 @@ function getCookie(name) {
     return "";
 }
 
-function createCookie(name, value, days) {
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        var expires = "; expires=" + date.toGMTString();
-    } else {
-        var expires = "";
-    }
-    document.cookie = name + "=" + value + expires + "; path=/";
-}
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+    'use strict'
 
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'ru',
-        includedLanguages: 'ru,ky', // Specify the languages you want to include
-        autoDisplay: false, // Prevent the automatic display of the translation widget
-    }, 'google_translate_element');
-
-    if (getCookie("googtrans") === "/ru/ky") {
+    if (getCookie(".AspNetCore.Culture") === "c%3Duk%7Cuic%3Duk") {
         $("#kyr-lang").addClass("lang-link-active");
     } else {
         $("#rus-lang").addClass("lang-link-active");
     }
-}
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-    'use strict'
 
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
@@ -61,15 +42,5 @@ function googleTranslateElementInit() {
 })();
 
 $(document).ready(function () {
-    $('.phone-input').inputmask('+999 999 999999');
+    $('.phone-input').inputmask('+996 (999) 99-99-99');
 });
-
-function ChangeLanguageToKyr() {
-    createCookie("googtrans", "/ru/ky", 1);
-    location.reload();
-}
-
-function ChangeLanguageToRu() {
-    createCookie("googtrans", "/ru/ru", 1);
-    location.reload();
-}

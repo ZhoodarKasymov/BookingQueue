@@ -1,12 +1,17 @@
 using System.Data;
+using System.Globalization;
 using System.Net;
+using System.Reflection;
 using AspNetCore.ReCaptcha;
 using BookingQueue.BLL.Services;
 using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.DAL.GenericRepository;
+using BookingQueue.Resources;
 using log4net;
 using log4net.Config;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using MySql.Data.MySqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +23,8 @@ builder.Services.AddScoped<IDbConnection>(c => {
 });
 
 builder.Services.AddReCaptcha(builder.Configuration.GetSection("GoogleReCaptcha"));
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddSingleton<LocService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -26,7 +33,16 @@ builder.Services.AddTransient<IServicesService, ServicesService>();
 builder.Services.AddTransient<IAdvanceService, AdvanceService>();
 
 builder.Services.AddRazorPages();
-builder.Services.AddMvc();
+builder.Services.AddMvc()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization(options =>
+    {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+        {
+            var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
+            return factory.Create("SharedResource", assemblyName.Name);
+        };
+    });
 builder.Services.AddDirectoryBrowser();
 
 var app = builder.Build();
@@ -60,6 +76,19 @@ app.UseExceptionHandler(errorApp =>
 
         await context.Response.WriteAsync("An error occurred. Please try again later.");
     });
+});
+
+var supportedCultures = new[]
+{
+    new CultureInfo("ru"),
+    new CultureInfo("uk"),
+};
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("ru", "ru"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
 });
 
 app.UseHttpsRedirection();
