@@ -3,10 +3,10 @@ using System.Globalization;
 using System.Net;
 using System.Reflection;
 using AspNetCore.ReCaptcha;
+using BookingQueue.BLL.Resources;
 using BookingQueue.BLL.Services;
 using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.DAL.GenericRepository;
-using BookingQueue.Resources;
 using log4net;
 using log4net.Config;
 using Microsoft.AspNetCore.Diagnostics;
@@ -33,6 +33,7 @@ builder.Services.AddTransient<IServicesService, ServicesService>();
 builder.Services.AddTransient<IAdvanceService, AdvanceService>();
 
 builder.Services.AddRazorPages();
+builder.Services.AddSession();
 builder.Services.AddMvc()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization(options =>
@@ -43,7 +44,6 @@ builder.Services.AddMvc()
             return factory.Create("SharedResource", assemblyName.Name);
         };
     });
-builder.Services.AddDirectoryBrowser();
 
 var app = builder.Build();
 
@@ -74,7 +74,7 @@ app.UseExceptionHandler(errorApp =>
         var logger = LogManager.GetLogger(exceptionHandlerPathFeature?.Path);
         logger.Error("An error occurred.", exception);
 
-        await context.Response.WriteAsync("An error occurred. Please try again later.");
+        await context.Response.WriteAsync(exception?.Message ?? "Произошла ошибка. Пожалуйста, повторите попытку позже.");
     });
 });
 
@@ -93,6 +93,7 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 

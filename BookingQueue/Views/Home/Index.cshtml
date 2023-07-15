@@ -7,7 +7,9 @@
 }
 
 <div>
-    <h4><bold>@ViewData["Title"]</bold></h4>
+    <h4>
+        <bold>@ViewData["Title"]</bold>
+    </h4>
 </div>
 
 <form asp-controller="Home" asp-action="Index" method="post" class="row g-3 needs-validation" novalidate>
@@ -26,7 +28,7 @@
                 </label>
                 <div class="bs-custom-control w-100 d-flex flex-wrap align-items-center">
                     <div class="w-100">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required="required" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control custom-input-gns", required = "required" })
                         <div class="invalid-feedback">@(string.Format(Localization.GetLocalizedString("Validation_cant_be_empty"), Localization.GetLocalizedString("Name")))</div>
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                     </div>
@@ -46,7 +48,7 @@
                 </label>
                 <div class="bs-custom-control w-100 d-flex flex-wrap align-items-center">
                     <div class="w-100">
-                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control phone-input", required="required" })
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control custom-input-gns phone-input", required = "required" })
                         <div class="invalid-feedback">@(string.Format(Localization.GetLocalizedString("Validation_cant_be_empty"), Localization.GetLocalizedString("Phone")))</div>
                         @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                     </div>
@@ -57,7 +59,7 @@
 
     <div class="col-12">
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <input class="form-check-input custom-input-gns" type="checkbox" value="" id="invalidCheck" required>
             <label class="form-check-label" for="invalidCheck">
                 @Localization.GetLocalizedString("Agree") <a asp-area="" asp-controller="Home" asp-action="Privacy" target="_blank">@Localization.GetLocalizedString("WithPrivacy")</a>
             </label>
@@ -71,6 +73,10 @@
         @Html.ValidationMessage("Recaptcha", "", new { @class = "text-danger" })
         @Html.ReCaptcha()
 
-        <button type="submit" class="btn btn-primary mt-3">@Localization.GetLocalizedString("Next")</button>
+        <div class="row">
+            <div class="col-12 col-md-4 mt-3">
+                <button type="submit" class="btn custom_button_gns">@Localization.GetLocalizedString("Next")</button>
+            </div>
+        </div>
     </div>
 </form>

@@ -78,4 +78,22 @@
     <data name="BookingBtn" xml:space="preserve">
         <value>Кезекке туруу</value>
     </data>
+    <data name="RecaptchaErrorMessage" xml:space="preserve">
+        <value>Сиз Recaptcha текшерүүдөн өткөн жоксуз!</value>
+    </data>
+    <data name="ChooseServicesPlease" xml:space="preserve">
+        <value>Кызматты тандаңыз улантуу үчүн!</value>
+    </data>
+    <data name="ChooseDateAndTimePlease" xml:space="preserve">
+        <value>Күндү жана убакытты тандаңыз улантуу учун!</value>
+    </data>
+    <data name="YouInQueue" xml:space="preserve">
+        <value>Сиз кезектеcиз!</value>
+    </data>
+    <data name="Id" xml:space="preserve">
+        <value>Сиздин идентификациялык кодуңуз</value>
+    </data>
+    <data name="SaveElectronCode" xml:space="preserve">
+        <value>Электрондук кезектин кодун сактаңыз!</value>
+    </data>
 </root>

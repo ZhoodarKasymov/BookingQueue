@@ -6,6 +6,7 @@
     <title>@ViewData["Title"]</title>
     <link rel="icon" href="~/images/logo 1.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/css/sweetalert2.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/BookingQueue.styles.css" asp-append-version="true"/>
 </head>
@@ -63,6 +64,8 @@
 </header>
 
 <div class="container body-container">
+    <div id="loader"></div>
+    <div id="overlay"></div>
     <main role="main" class="pb-5">
         @RenderBody()
     </main>
@@ -71,6 +74,8 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/jquery.inputmask.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/sweetalert2.all.min.js"></script>
+<script src="~/lib/html2canvas.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>

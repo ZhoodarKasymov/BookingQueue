@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Localization;
 
-namespace BookingQueue.Resources;
+namespace BookingQueue.BLL.Resources;
 
 public class LocService
 {

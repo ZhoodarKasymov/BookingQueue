@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
+using System.Reflection;
 using Dapper;
 
 namespace BookingQueue.DAL.GenericRepository;
@@ -53,18 +55,18 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
 
     private string GenerateInsertQuery()
     {
-        var tableName = typeof(TEntity).Name;
-        var properties = typeof(TEntity).GetProperties().Where(p => p.Name != "Id");
-        var columns = string.Join(",", properties.Select(p => p.Name));
+        var tableName = typeof(TEntity).GetCustomAttribute<TableAttribute>()?.Name ?? typeof(TEntity).Name;
+        var properties = typeof(TEntity).GetProperties();
+        var columns = string.Join(",", properties.Select(p => p.GetCustomAttribute<ColumnAttribute>()?.Name ?? p.Name));
         var values = string.Join(",", properties.Select(p => "@" + p.Name));
         return $"INSERT INTO {tableName} ({columns}) VALUES ({values})";
     }
 
     private string GenerateUpdateQuery()
     {
-        var tableName = typeof(TEntity).Name;
+        var tableName = typeof(TEntity).GetCustomAttribute<TableAttribute>()?.Name ?? typeof(TEntity).Name;
         var properties = typeof(TEntity).GetProperties().Where(p => p.Name != "Id");
-        var columns = string.Join(",", properties.Select(p => $"{p.Name}=@{p.Name}"));
+        var columns = string.Join(",", properties.Select(p => $"{p.GetCustomAttribute<ColumnAttribute>()?.Name ?? p.Name}=@{p.GetCustomAttribute<ColumnAttribute>()?.Name ?? p.Name}"));
         return $"UPDATE {tableName} SET {columns} WHERE Id=@Id";
     }
 

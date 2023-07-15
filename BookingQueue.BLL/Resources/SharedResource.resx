@@ -77,4 +77,22 @@
     <data name="BookingBtn" xml:space="preserve">
         <value />
     </data>
+    <data name="RecaptchaErrorMessage" xml:space="preserve">
+        <value />
+    </data>
+    <data name="ChooseServicesPlease" xml:space="preserve">
+        <value />
+    </data>
+    <data name="ChooseDateAndTimePlease" xml:space="preserve">
+        <value />
+    </data>
+    <data name="YouInQueue" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Id" xml:space="preserve">
+        <value />
+    </data>
+    <data name="SaveElectronCode" xml:space="preserve">
+        <value />
+    </data>
 </root>

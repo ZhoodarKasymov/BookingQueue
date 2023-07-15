@@ -1,8 +1,10 @@
 ﻿using System.Data;
+using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.Common.Models;
 using BookingQueue.Common.Models.ViewModels;
 using BookingQueue.DAL.GenericRepository;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 
 namespace BookingQueue.BLL.Services;
 
@@ -10,14 +12,19 @@ public class AdvanceService : IAdvanceService
 {
     private readonly IDbConnection _db;
     private readonly IGenericRepository<Advance> _repository;
+    private readonly IConfiguration _configuration;
 
-    public AdvanceService(IDbConnection db, IGenericRepository<Advance> repository)
+    public AdvanceService(
+        IDbConnection db, 
+        IGenericRepository<Advance> repository,
+        IConfiguration configuration)
     {
         _db = db;
         _repository = repository;
+        _configuration = configuration;
     }
 
-    public async Task<string> BookTimeAsync(BookViewModel bookViewModel, int maxClients)
+    public async Task<string> BookTimeAsync(BookViewModel bookViewModel)
     {
         await CheckAdvanceDateTimeAsync(bookViewModel.BookingDate, bookViewModel.ServiceId);
 
@@ -32,7 +39,7 @@ public class AdvanceService : IAdvanceService
             ServiceId = bookViewModel.ServiceId
         });
 
-        if (result == 0)
+        if (result <= 0)
             throw new Exception("Что-то пошло не так, очередь не сохранен.");
 
         return uniqueNumber.ToString();
@@ -42,30 +49,34 @@ public class AdvanceService : IAdvanceService
 
     private async Task CheckAdvanceDateTimeAsync(DateTime? date, long? serviceId)
     {
+        var maxClientCount = Convert.ToInt64(_configuration.GetSection("MaxClientsInService:MaxCount").Value);
         var query = $"SELECT COUNT(*) FROM {typeof(Advance).Name} WHERE advance_time = @DateTime && service_id = @ServiveId";
         var count = await _db.ExecuteScalarAsync<int>(query, new { DateTime = date, ServiveId =  serviceId});
         
-        if (count > 10)
+        if (count >= maxClientCount)
             throw new Exception("Нет свободного места, выберите другое время!");
     }
 
-    private async Task<int> GenerateUniqueIDAsync()
+    private async Task<long> GenerateUniqueIDAsync()
     {
         var id = GenerateRandomID();
+        var maxValue = Convert.ToDecimal(id);
+        
+        if (maxValue > 2147483647) await GenerateUniqueIDAsync();
         
         while (!await IsUniqueIDAsync(id))
         {
             id = GenerateRandomID();
         }
 
-        return Convert.ToInt32(id);
+        return Convert.ToInt64(id);
     }
 
     private string GenerateRandomID()
     {
         var random = new Random();
         
-        var idLength = random.Next(1000, 999999999);
+        var idLength = random.Next(5, 10);
         var chars = "0123456789";
         
         return new string(Enumerable.Repeat(chars, idLength)

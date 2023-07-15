@@ -1,11 +1,12 @@
 ﻿using System.Globalization;
 using AspNetCore.ReCaptcha;
-using BookingQueue.BLL.Services;
+using BookingQueue.BLL.Resources;
 using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.Common.Models.ViewModels;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace BookingQueue.Controllers;
 
@@ -13,19 +14,19 @@ public class HomeController : Controller
 {
     private readonly IWebHostEnvironment _hostEnvironment;
     private readonly IServicesService _servicesService;
-    private readonly IConfiguration _configuration;
     private readonly IAdvanceService _advanceService;
+    private readonly LocService _localization;
 
     public HomeController(
         IWebHostEnvironment hostEnvironment, 
-        IServicesService servicesService, 
-        IConfiguration configuration,
-        IAdvanceService advanceService)
+        IServicesService servicesService,
+        IAdvanceService advanceService,
+        LocService localization)
     {
         _hostEnvironment = hostEnvironment;
         _servicesService = servicesService;
-        _configuration = configuration;
         _advanceService = advanceService;
+        _localization = localization;
     }
 
     public IActionResult Index()
@@ -34,35 +35,50 @@ public class HomeController : Controller
     }
     
     [HttpPost]
-    [ValidateReCaptcha(ErrorMessage = "Вы не прошли проверку Recaptcha.")]
+    [ValidateReCaptcha]
     [ValidateAntiForgeryToken]
     public IActionResult Index(BookViewModel bookViewModel)
     {
         if (!ModelState.IsValid)
-            return View(bookViewModel);
+        {
+            if (ModelState.ContainsKey("Recaptcha"))
+            {
+                ModelState.Remove("Recaptcha");
+                ModelState.AddModelError("Recaptcha", _localization.GetLocalizedString("RecaptchaErrorMessage"));
+            }
 
-        TempData["bookViewModel"] = bookViewModel;
+            return View(bookViewModel);
+        }
+            
+
+        TempData["bookViewModel"] = JsonConvert.SerializeObject(bookViewModel);
         
-        return RedirectToAction("SelectServices");
+        return RedirectToAction("SelectServices", "Home");
     }
 
     public async Task<IActionResult> SelectServices()
     {
         var ci = CultureInfo.CurrentCulture.Name;
         var activeServices = await _servicesService.GetAllActiveAsync();
-        ViewData["Services"] = activeServices.Select(s => new SelectListItem(ci == "uk" ? s.TranslatedName : s.Name, s.Id.ToString()));
-        return View();
+        var services = activeServices
+            .Select(s => new SelectListItem(ci == "uk" ? s.TranslatedName : s.Name, s.Id.ToString()));
+        
+        return View(services);
     }
 
+    [HttpPost]
     public async Task<string> BookingTime(DateTime? bookingTime, long? serviceId)
     {
-        var bookViewModel = TempData["bookViewModel"] as BookViewModel;
-        var maxUserCountOnService = _configuration.GetValue<int>("MaxClientsInService:MaxCount");
+        if (bookingTime is null) throw new Exception(_localization.GetLocalizedString("ChooseDateAndTimePlease"));
         
-        bookViewModel.BookingDate = bookingTime;
+        if (serviceId is null) throw new Exception(_localization.GetLocalizedString("ChooseServicesPlease"));
+        
+        var bookViewModel = JsonConvert.DeserializeObject<BookViewModel>((string)TempData["bookViewModel"]!);
+        
+        bookViewModel.BookingDate = bookingTime.Value.ToLocalTime();
         bookViewModel.ServiceId = serviceId;
         
-        var result = await _advanceService.BookTimeAsync(bookViewModel, maxUserCountOnService);
+        var result = await _advanceService.BookTimeAsync(bookViewModel);
         return result;
     }
 
