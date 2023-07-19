@@ -46,12 +46,12 @@ body {
 }
 
 .text-nav-gns-brand {
-  color: #000;
+  color: #000 !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  white-space: pre-line;
+  word-break: break-word;
 }
 
 .second-gns-nav {
@@ -62,7 +62,7 @@ body {
 
 .gns-nav-link {
   padding: 1px 6px;
-  color: #FFF;
+  color: #FFF !important;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -72,7 +72,7 @@ body {
 }
 
 .gns-nav-link:hover{
-  color: #000;
+  color: #000 !important;
   background: #fff;
   text-decoration: none;
 }
@@ -97,7 +97,7 @@ body {
 }
 
 .gns-nav-link-third {
-  color: #5A5956;
+  color: #5A5956 !important;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -106,7 +106,7 @@ body {
 }
 
 .gns-nav-link-third:hover {
-  color: #000;
+  color: #000 !important;
   text-decoration-line: underline;
   background: #EEE;
 }
@@ -121,7 +121,7 @@ body {
 
 .email-request {
   right: 0;
-  color: #0F9197;
+  color: #0F9197 !important;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -131,7 +131,7 @@ body {
 }
 
 .email-request:hover {
-  color: #0F9197;
+  color: #0F9197 !important;
 }
 
 .lang-link {
@@ -143,7 +143,7 @@ body {
 }
 
 .lang-link-active {
-  text-decoration-line: underline;
+  text-decoration-line: underline !important;
 }
 
 .service_card {
@@ -173,7 +173,7 @@ body {
 }
 
 .custom_button_gns {
-  color: #FFF;
+  color: #FFF !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
@@ -190,12 +190,12 @@ body {
 }
 
 .gns-service-card-active {
-  background: #0C949A;
-  color: #FFF;
+  background: #0C949A !important;
+  color: #FFF !important;
 }
 
 .gns-service-card-active svg path {
-  fill: #FFF;
+  fill: #FFF !important;
 }
 
 #loader {
@@ -303,7 +303,7 @@ body {
 }
 
 .body-talon {
-  color: #0C949A;
+  color: #0C949A !important;
   font-size: 80px;
   font-style: normal;
   font-weight: 400;
