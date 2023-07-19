@@ -49,11 +49,10 @@ public class HomeController : Controller
 
             return View(bookViewModel);
         }
-            
 
         TempData["bookViewModel"] = JsonConvert.SerializeObject(bookViewModel);
         
-        return RedirectToAction("SelectServices", "Home");
+        return RedirectToAction("SelectServices");
     }
 
     public async Task<IActionResult> SelectServices()
@@ -66,12 +65,18 @@ public class HomeController : Controller
         return View(services);
     }
 
+    public async Task<List<SelectListItem>> GetTimeWithPeriodByDate(DateTime? bookingTime, long? serviceId)
+    {
+        ValidateParams(bookingTime, serviceId);
+        var timesWithPeriods = await _servicesService.GetTimeWithPeriodByDate(bookingTime.Value.ToLocalTime(), serviceId);
+        
+        return timesWithPeriods.Select(t => new SelectListItem(t, t)).ToList();
+    }
+
     [HttpPost]
     public async Task<string> BookingTime(DateTime? bookingTime, long? serviceId)
     {
-        if (bookingTime is null) throw new Exception(_localization.GetLocalizedString("ChooseDateAndTimePlease"));
-        
-        if (serviceId is null) throw new Exception(_localization.GetLocalizedString("ChooseServicesPlease"));
+        ValidateParams(bookingTime, serviceId);
         
         var bookViewModel = JsonConvert.DeserializeObject<BookViewModel>((string)TempData["bookViewModel"]!);
         
@@ -87,7 +92,7 @@ public class HomeController : Controller
         Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMonths(1) }
         );
 
         return LocalRedirect(returnUrl);
@@ -114,4 +119,15 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    #region Private methods
+
+    private void ValidateParams(DateTime? bookingDate, long? serviceId)
+    {
+        if (bookingDate is null) throw new Exception(_localization.GetLocalizedString("ChooseDateAndTimePlease"));
+        
+        if (serviceId is null) throw new Exception(_localization.GetLocalizedString("ChooseServicesPlease"));
+    }
+
+    #endregion
 }

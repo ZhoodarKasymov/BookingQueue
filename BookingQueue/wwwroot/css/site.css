@@ -98,7 +98,7 @@ body {
 
 .gns-nav-link-third {
   color: #5A5956;
-  font-size: 14px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -149,7 +149,7 @@ body {
 .service_card {
   height: 70px;
   background: #E5F3F4;
-  font-size: 14px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -161,7 +161,15 @@ body {
   width: 100%;
   background: #E5F3F4;
   border: none;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   border-bottom: 1px solid #0C949A;
+}
+
+.date-time:focus-visible {
+  outline: none !important;
 }
 
 .custom_button_gns {

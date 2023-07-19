@@ -66,18 +66,9 @@ $(document).ready(function () {
     $('.phone-input').inputmask("+\\9\\96 (999) 99-99-99");
     
     $(document).ready(function() {
-        var today = new Date().toISOString().split('T')[0];
+        let today = new Date().toISOString().split('T')[0];
         $('#gns_date').attr('min', today);
     });
-
-    var now = new Date();
-    var hours = now.getHours();
-    var minutes = now.getMinutes();
-    if (minutes < 10) {
-        minutes = '0' + minutes;
-    }
-    var currentTime = hours + ':' + minutes;
-    $('#gns_time').attr('min', currentTime);
 });
 
 function showLoader() {
@@ -123,8 +114,8 @@ function downloadHtml(html) {
     container.appendChild(myElement);
     document.body.appendChild(container); // Append the container to the DOM
     html2canvas(container).then(function(canvas) {
-        var dataURL = canvas.toDataURL();
-        var link = document.createElement("a");
+        let dataURL = canvas.toDataURL();
+        let link = document.createElement("a");
         link.download = "talon.png";
         link.href = dataURL;
         link.click();
@@ -147,7 +138,7 @@ function printHtml(html) {
     setTimeout(function() {
         newWindow.print();
         newWindow.close();
-    }, 2500);
+    }, 2000);
 }
 
 function copyText(text) {

@@ -40,7 +40,7 @@
         <value>Бош орундар</value>
     </data>
     <data name="Header_path_link" xml:space="preserve">
-        <value>  Башкы бет</value>
+        <value>Башкы бет</value>
     </data>
     <data name="Email_request" xml:space="preserve">
         <value>Электрондук кайрылуу</value>
@@ -95,5 +95,20 @@
     </data>
     <data name="SaveElectronCode" xml:space="preserve">
         <value>Электрондук кезектин кодун сактаңыз!</value>
+    </data>
+    <data name="Error_NotSaved" xml:space="preserve">
+        <value>Бир нерсе туура эмес болуп, кезек сакталган жок.</value>
+    </data>
+    <data name="Error_MaxCountOfUser" xml:space="preserve">
+        <value>Бош орун жок, башка убакытты тандаңыз!</value>
+    </data>
+    <data name="Error_PleaseChooseServiceBeforeDate" xml:space="preserve">
+        <value>Убакыт менен кунду тандоо учун биринчи кызматты танданыз!</value>
+    </data>
+    <data name="Error_PleaseChooseDateBeforeTime" xml:space="preserve">
+        <value>Күндү тандаңыз, убакытты тандоо үчүн!</value>
+    </data>
+    <data name="Error_NotWorking" xml:space="preserve">
+        <value>Жумуш убактысы эмес!</value>
     </data>
 </root>

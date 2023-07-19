@@ -1,10 +1,11 @@
 ﻿using System.Data;
+using BookingQueue.BLL.Helpers;
+using BookingQueue.BLL.Resources;
 using BookingQueue.BLL.Services.Interfaces;
 using BookingQueue.Common.Models;
 using BookingQueue.Common.Models.ViewModels;
 using BookingQueue.DAL.GenericRepository;
 using Dapper;
-using Microsoft.Extensions.Configuration;
 
 namespace BookingQueue.BLL.Services;
 
@@ -12,21 +13,23 @@ public class AdvanceService : IAdvanceService
 {
     private readonly IDbConnection _db;
     private readonly IGenericRepository<Advance> _repository;
-    private readonly IConfiguration _configuration;
+    private readonly LocService _localization;
 
     public AdvanceService(
         IDbConnection db, 
         IGenericRepository<Advance> repository,
-        IConfiguration configuration)
+        LocService localization)
     {
         _db = db;
         _repository = repository;
-        _configuration = configuration;
+        _localization = localization;
     }
 
     public async Task<string> BookTimeAsync(BookViewModel bookViewModel)
     {
         await CheckAdvanceDateTimeAsync(bookViewModel.BookingDate, bookViewModel.ServiceId);
+        
+        await CheckWorkingTimeAsync(bookViewModel.BookingDate);
 
         var uniqueNumber = await GenerateUniqueIDAsync();
 
@@ -40,7 +43,7 @@ public class AdvanceService : IAdvanceService
         });
 
         if (result <= 0)
-            throw new Exception("Что-то пошло не так, очередь не сохранен.");
+            throw new Exception(_localization.GetLocalizedString("Error_NotSaved"));
 
         return uniqueNumber.ToString();
     }
@@ -49,12 +52,38 @@ public class AdvanceService : IAdvanceService
 
     private async Task CheckAdvanceDateTimeAsync(DateTime? date, long? serviceId)
     {
-        var maxClientCount = Convert.ToInt64(_configuration.GetSection("MaxClientsInService:MaxCount").Value);
-        var query = $"SELECT COUNT(*) FROM {typeof(Advance).Name} WHERE advance_time = @DateTime && service_id = @ServiveId";
-        var count = await _db.ExecuteScalarAsync<int>(query, new { DateTime = date, ServiveId =  serviceId});
+        var query = @"SELECT 
+                        CASE 
+	                        WHEN (SELECT COUNT(*) FROM advance WHERE advance_time = @DateTime && service_id = s.id) >= s.advance_limit
+                            THEN 'true'
+	                        ELSE 'false' 
+                        END AS is_more_then_advance_limit
+                        FROM services AS s
+                        WHERE s.id = @ServiveId;";
         
-        if (count >= maxClientCount)
-            throw new Exception("Нет свободного места, выберите другое время!");
+        var result = await _db.QueryFirstOrDefaultAsync(query, new { DateTime = date, ServiveId =  serviceId});
+        
+        if(Convert.ToBoolean(result.is_more_then_advance_limit))
+            throw new Exception(_localization.GetLocalizedString("Error_MaxCountOfUser"));
+    }
+
+    private async Task CheckWorkingTimeAsync(DateTime? date)
+    {
+        var time = date.Value.TimeOfDay.ToString();
+        var dayOfWeekNumber = DateTimeHelpers.GetCorrectedTimeBegin(date.Value.DayOfWeek);
+        
+        var query = $@"SELECT
+                      CASE
+                        WHEN time(@time) BETWEEN time_begin_{dayOfWeekNumber} AND time_end_{dayOfWeekNumber} THEN 'false'
+                        ELSE 'true'
+                      END AS is_not_in_time_range
+                    FROM schedule 
+                    WHERE id = 1;";
+
+        var result = await _db.QueryFirstOrDefaultAsync(query, new { time = time });
+        
+        if(Convert.ToBoolean(result.is_not_in_time_range))
+            throw new Exception(_localization.GetLocalizedString("Error_NotWorking"));
     }
 
     private async Task<long> GenerateUniqueIDAsync()

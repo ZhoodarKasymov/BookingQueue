@@ -103,4 +103,19 @@
     <data name="SaveElectronCode" xml:space="preserve">
         <value>Сохраните код электронной очереди!</value>
     </data>
+    <data name="Error_NotSaved" xml:space="preserve">
+        <value>Что-то пошло не так, очередь не сохранен.</value>
+    </data>
+    <data name="Error_MaxCountOfUser" xml:space="preserve">
+        <value>Нет свободного места, выберите другое время!</value>
+    </data>
+    <data name="Error_PleaseChooseServiceBeforeDate" xml:space="preserve">
+        <value>Выберите сперва услугу чтобы бронировать дату и время!</value>
+    </data>
+    <data name="Error_PleaseChooseDateBeforeTime" xml:space="preserve">
+        <value>Выберите дату чтобы выбрать время!</value>
+    </data>
+    <data name="Error_NotWorking" xml:space="preserve">
+        <value>Не рабочий период времени!</value>
+    </data>
 </root>
