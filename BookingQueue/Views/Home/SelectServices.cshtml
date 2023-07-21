@@ -4,6 +4,8 @@
     ViewData["Title"] = Localization.GetLocalizedString("Services");
 }
 
+@Html.AntiForgeryToken()
+
 <div class="mb-3">
     <h4>
         <bold>@ViewData["Title"]</bold>
@@ -61,6 +63,9 @@
         $('.service_card').click(function() {
           $('.service_card').removeClass('gns-service-card-active');
           $(this).addClass('gns-service-card-active');
+          $('#gns_date').val("");
+          $("#gns_time option").remove();
+          $("#gns_time").append(`<option>${'@Localization.GetLocalizedString("Error_PleaseChooseDateBeforeTime")'}</option>`);
         });
         
         $('#gns_date').change(function(event){
@@ -70,7 +75,7 @@
              if (!dataId){
                  dangerAlert('@Localization.GetLocalizedString("Error_PleaseChooseServiceBeforeDate")');
                  event.preventDefault();
-                 $(self).val("");
+                 $(self).val("");                 
              }                 
              else {
                  let gnsDate = $('#gns_date').val();
@@ -122,10 +127,15 @@
                     
                     showLoader();
                     
+                    let token = $("input[name='__RequestVerificationToken']").val();
+                    
                     $.ajax({
                       url: '@Url.Action("BookingTime", "Home")',
                       type: 'POST',
                       data: { bookingTime: dateTime.toISOString(), serviceId: dataId},
+                      beforeSend: function(xhr) {
+                        xhr.setRequestHeader("RequestVerificationToken", token);
+                      },
                       success: function(response) {                            
                         let html = `
                             <div class="row text-center w-100 pt-5">

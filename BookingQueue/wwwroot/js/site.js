@@ -31,7 +31,8 @@ function dangerAlert(message) {
         customClass: {
             closeButton: 'my-close-button-class'
         },
-        backdrop: false
+        backdrop: false,
+        timer: 3000
     });
 }
 

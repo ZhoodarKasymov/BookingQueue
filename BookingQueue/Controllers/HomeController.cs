@@ -74,6 +74,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<string> BookingTime(DateTime? bookingTime, long? serviceId)
     {
         ValidateParams(bookingTime, serviceId);
