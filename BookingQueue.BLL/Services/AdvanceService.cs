@@ -69,7 +69,11 @@ public class AdvanceService : IAdvanceService
 
     private async Task CheckWorkingTimeAsync(DateTime? date)
     {
-        var time = date.Value.TimeOfDay.ToString();
+        var time = date.Value.TimeOfDay;
+        
+        if(DateTime.Now.Date == date.Value.Date && DateTime.Now.TimeOfDay > time)
+            throw new Exception(_localization.GetLocalizedString("Error_NotWorking"));
+        
         var dayOfWeekNumber = DateTimeHelpers.GetCorrectedTimeBegin(date.Value.DayOfWeek);
         
         var query = $@"SELECT
@@ -80,7 +84,7 @@ public class AdvanceService : IAdvanceService
                     FROM schedule 
                     WHERE id = 1;";
 
-        var result = await _db.QueryFirstOrDefaultAsync(query, new { time = time });
+        var result = await _db.QueryFirstOrDefaultAsync(query, new { time = time.ToString() });
         
         if(Convert.ToBoolean(result.is_not_in_time_range))
             throw new Exception(_localization.GetLocalizedString("Error_NotWorking"));
