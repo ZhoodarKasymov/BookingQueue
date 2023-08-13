@@ -1,0 +1,165 @@
+﻿@{
+    ViewData["Title"] = Localization.GetLocalizedString("Branch_Index_Title");
+}
+
+<div class="mb-3">
+    <h4>
+        <bold>@ViewData["Title"]</bold>
+    </h4>
+</div>
+<hr>
+
+<div class="g-3 mt-3">
+    <h5 class="mt-5">
+        <bold>@Localization.GetLocalizedString("Branch_Index_Choose")</bold>
+    </h5>
+
+    <div class="row">
+        <div class="mt-3 col-12 col-md-3">
+            <a asp-controller="Database" asp-action="SwitchDatabase" asp-route-databaseName="DefaultConnection" class="service_card link-div p-4">
+                <div class="d-flex align-items-center">
+                    <svg style="margin-right: 5px; margin-bottom: 25px;" xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect x="1" width="10" height="24" fill="white"/>
+                        <rect x="13" y="12" width="10" height="12" fill="white"/>
+                        <rect x="3" y="3" width="2" height="3" fill="#0C949A"/>
+                        <rect x="15" y="14" width="2" height="2" fill="#0C949A"/>
+                        <rect x="3" y="9" width="2" height="3" fill="#0C949A"/>
+                        <rect x="15" y="18" width="2" height="2" fill="#0C949A"/>
+                        <rect x="7" y="3" width="2" height="3" fill="#0C949A"/>
+                        <rect x="19" y="14" width="2" height="2" fill="#0C949A"/>
+                        <rect x="7" y="9" width="2" height="3" fill="#0C949A"/>
+                        <rect x="19" y="18" width="2" height="2" fill="#0C949A"/>
+                    </svg>
+                    <p>@Localization.GetLocalizedString("Branch_Index_1")</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="mt-3 col-12 col-md-3">
+            <a asp-controller="Home" asp-action="Index" class="service_card link-div p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="1" width="10" height="24" fill="white"/>
+                    <rect x="13" y="12" width="10" height="12" fill="white"/>
+                    <rect x="3" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="3" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="18" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="18" width="2" height="2" fill="#0C949A"/>
+                </svg>
+                Октябрьский УГНС
+            </a>
+        </div>
+
+        <div class="mt-3 col-12 col-md-3">
+            <a asp-controller="Home" asp-action="Index" class="service_card link-div p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="1" width="10" height="24" fill="white"/>
+                    <rect x="13" y="12" width="10" height="12" fill="white"/>
+                    <rect x="3" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="3" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="18" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="18" width="2" height="2" fill="#0C949A"/>
+                </svg>
+                Ленинский УГНС
+            </a>
+        </div>
+
+        <div class="mt-3 col-12 col-md-3">
+            <a asp-controller="Home" asp-action="Index" class="service_card link-div p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="1" width="10" height="24" fill="white"/>
+                    <rect x="13" y="12" width="10" height="12" fill="white"/>
+                    <rect x="3" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="3" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="18" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="18" width="2" height="2" fill="#0C949A"/>
+                </svg>
+                Аламудунский УГНС
+            </a>
+        </div>
+
+        <div class="mt-3 col-12 col-md-3">
+            <a asp-controller="Home" asp-action="Index" class="service_card link-div p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="1" width="10" height="24" fill="white"/>
+                    <rect x="13" y="12" width="10" height="12" fill="white"/>
+                    <rect x="3" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="3" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="18" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="18" width="2" height="2" fill="#0C949A"/>
+                </svg>
+                Джалал-Абадский УГНС
+            </a>
+        </div>
+
+        <div class="mt-3 col-12 col-md-3">
+            <a asp-controller="Home" asp-action="Index" class="service_card link-div p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="1" width="10" height="24" fill="white"/>
+                    <rect x="13" y="12" width="10" height="12" fill="white"/>
+                    <rect x="3" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="3" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="18" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="18" width="2" height="2" fill="#0C949A"/>
+                </svg>
+                Первомайский УГНС
+            </a>
+        </div>
+
+        <div class="mt-3 col-12 col-md-3">
+            <a asp-controller="Home" asp-action="Index" class="service_card link-div p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="1" width="10" height="24" fill="white"/>
+                    <rect x="13" y="12" width="10" height="12" fill="white"/>
+                    <rect x="3" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="3" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="18" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="18" width="2" height="2" fill="#0C949A"/>
+                </svg>
+                Свердловский УГНС
+            </a>
+        </div>
+
+        <div class="mt-3 col-12 col-md-3">
+            <a asp-controller="Home" asp-action="Index" class="service_card link-div p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="1" width="10" height="24" fill="white"/>
+                    <rect x="13" y="12" width="10" height="12" fill="white"/>
+                    <rect x="3" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="3" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="15" y="18" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="3" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="14" width="2" height="2" fill="#0C949A"/>
+                    <rect x="7" y="9" width="2" height="3" fill="#0C949A"/>
+                    <rect x="19" y="18" width="2" height="2" fill="#0C949A"/>
+                </svg>
+                ЦОП по г. Бишкек
+            </a>
+        </div>
+
+    </div>
+</div>

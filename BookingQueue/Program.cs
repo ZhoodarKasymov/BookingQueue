@@ -12,14 +12,43 @@ using log4net.Config;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
-using MySql.Data.MySqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure your database connection
-builder.Services.AddScoped<IDbConnection>(c => {
-    var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
-    return new MySqlConnection(connectionString);
+builder.Services.AddDistributedMemoryCache(); // Use a distributed cache for session state in a production scenario
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(1); // Set session timeout
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<IDbConnectionFactory, DbConnectionFactory>();
+builder.Services.AddScoped<IDbConnection>(sp =>
+{
+    var connectionFactory = sp.GetRequiredService<IDbConnectionFactory>();
+    var httpContextAccessor = sp.GetRequiredService<IHttpContextAccessor>();
+
+    // Check if the HttpContext is available
+    var session = httpContextAccessor.HttpContext?.Session;
+
+    // Check if the session is available and get the selected database
+    if (session != null)
+    {
+        var selectedDatabase = session.GetString("SelectedDatabase");
+        if (!string.IsNullOrEmpty(selectedDatabase))
+        {
+            var connectionString = builder.Configuration[$"ConnectionStrings:{selectedDatabase}"];
+            if (!string.IsNullOrEmpty(connectionString))
+            {
+                return connectionFactory.CreateConnection(connectionString);
+            }
+        }
+    }
+
+    httpContextAccessor.HttpContext?.Response.Redirect("/");
+    return null;
 });
 
 builder.Services.AddReCaptcha(builder.Configuration.GetSection("GoogleReCaptcha"));
@@ -33,7 +62,6 @@ builder.Services.AddTransient<IServicesService, ServicesService>();
 builder.Services.AddTransient<IAdvanceService, AdvanceService>();
 
 builder.Services.AddRazorPages();
-builder.Services.AddSession();
 builder.Services.AddMvc()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization(options =>
@@ -74,7 +102,14 @@ app.UseExceptionHandler(errorApp =>
         var logger = LogManager.GetLogger(exceptionHandlerPathFeature?.Path);
         logger.Error("An error occurred.", exception);
 
-        await context.Response.WriteAsync(exception?.Message ?? "Произошла ошибка. Пожалуйста, повторите попытку позже.");
+        if (exceptionHandlerPathFeature?.Error is NullReferenceException)
+        {
+            context.Response.Redirect("/");
+            return;
+        }
+
+        await context.Response.WriteAsync(
+            exception?.Message ?? "Произошла ошибка. Пожалуйста, повторите попытку позже.");
     });
 });
 
@@ -103,6 +138,6 @@ app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Branch}/{action=Index}/{id?}");
 
 app.Run();

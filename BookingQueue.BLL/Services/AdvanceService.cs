@@ -71,7 +71,7 @@ public class AdvanceService : IAdvanceService
     {
         var time = date.Value.TimeOfDay;
         
-        if(DateTime.Now.Date == date.Value.Date && DateTime.Now.TimeOfDay > time)
+        if(DateTime.Now.Date > date.Value.Date || (DateTime.Now.Date == date.Value.Date && DateTime.Now.TimeOfDay > time))
             throw new Exception(_localization.GetLocalizedString("Error_NotWorking"));
         
         var dayOfWeekNumber = DateTimeHelpers.GetCorrectedTimeBegin(date.Value.DayOfWeek);

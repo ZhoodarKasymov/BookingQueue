@@ -111,4 +111,14 @@
     <data name="Error_NotWorking" xml:space="preserve">
         <value>Жумуш убактысы эмес!</value>
     </data>
+    <data name="Branch_Index_Title" xml:space="preserve">
+        <value>МСКнын филиалдары</value>
+    </data>
+    <data name="Branch_Index_Choose" xml:space="preserve">
+        <value>Филиалды тандаңыз</value>
+    </data>
+    <data name="Branch_Index_1" xml:space="preserve">
+        <value>Тейлөө борбору
+Ош шаары боюнча ишкерлерге</value>
+    </data>
 </root>

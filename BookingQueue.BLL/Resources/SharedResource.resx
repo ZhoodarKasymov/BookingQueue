@@ -110,4 +110,13 @@
     <data name="Error_NotWorking" xml:space="preserve">
         <value />
     </data>
+    <data name="Branch_Index_Title" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Branch_Index_Choose" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Branch_Index_1" xml:space="preserve">
+        <value />
+    </data>
 </root>

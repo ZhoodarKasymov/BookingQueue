@@ -80,6 +80,7 @@ body {
 .navbar-brand {
   display: flex;
   align-items: center;
+  white-space: unset !important;
 }
 
 .navbar-brand img {
@@ -322,4 +323,15 @@ body {
   .email-request {
     position: unset !important;
   }
+}
+
+.link-div {
+  display: block !important;
+  text-decoration: none !important;
+  color: #FFF !important;
+  background: #0C949A !important;
+}
+
+.link-div:visited {
+  color: #FFF !important;
 }

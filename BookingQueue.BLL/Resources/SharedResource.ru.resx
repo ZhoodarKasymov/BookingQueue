@@ -118,4 +118,14 @@
     <data name="Error_NotWorking" xml:space="preserve">
         <value>Не рабочий период времени!</value>
     </data>
+    <data name="Branch_Index_Title" xml:space="preserve">
+        <value>Филиалы ГНС</value>
+    </data>
+    <data name="Branch_Index_Choose" xml:space="preserve">
+        <value>Выберите филиал</value>
+    </data>
+    <data name="Branch_Index_1" xml:space="preserve">
+        <value>Центр обслуживания
+предпринимателей по г.Ош</value>
+    </data>
 </root>
