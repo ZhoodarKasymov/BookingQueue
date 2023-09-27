@@ -28,7 +28,7 @@
                 </label>
                 <div class="bs-custom-control w-100 d-flex flex-wrap align-items-center">
                     <div class="w-100">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control custom-input-gns", required = "required" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control custom-input-gns", required = "required", autocomplete="off" })
                         <div class="invalid-feedback">@(string.Format(Localization.GetLocalizedString("Validation_cant_be_empty"), Localization.GetLocalizedString("Name")))</div>
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
                     </div>
@@ -48,7 +48,7 @@
                 </label>
                 <div class="bs-custom-control w-100 d-flex flex-wrap align-items-center">
                     <div class="w-100">
-                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control custom-input-gns phone-input", required = "required" })
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control custom-input-gns phone-input", required = "required", autocomplete="off" })
                         <div class="invalid-feedback">@(string.Format(Localization.GetLocalizedString("Validation_cant_be_empty"), Localization.GetLocalizedString("Phone")))</div>
                         @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
                     </div>

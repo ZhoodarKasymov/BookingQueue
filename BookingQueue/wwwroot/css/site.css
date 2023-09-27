@@ -160,6 +160,7 @@ body {
 .date-time {
   height: 70px;
   width: 100%;
+  min-width: 96% !important;
   background: #E5F3F4;
   border: none;
   font-size: 13px;
