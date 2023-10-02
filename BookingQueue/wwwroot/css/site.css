@@ -155,6 +155,7 @@ body {
   font-weight: 400;
   line-height: normal;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .date-time {
@@ -335,4 +336,13 @@ body {
 
 .link-div:visited {
   color: #FFF !important;
+}
+
+.accordion-header > button:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #c7c8c9 !important;
 }

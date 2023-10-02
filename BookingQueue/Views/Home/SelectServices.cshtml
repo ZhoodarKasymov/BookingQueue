@@ -1,4 +1,7 @@
-﻿@model IEnumerable<SelectListItem>
+﻿@using BookingQueue.Common.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Text.RegularExpressions
+@model IEnumerable<SelectListItem>
 
 @{
     ViewData["Title"] = Localization.GetLocalizedString("Services");
@@ -19,16 +22,78 @@
     </h5>
 
     <div class="row">
-        @foreach (var service in Model)
+        @if (ViewBag.IsManyServices)
         {
-            <div class="mt-3 col-12 col-md-4">
-                <div class="service_card p-4" data-id="@service.Value">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="#0C949A"/>
-                    </svg>
-                    @service.Text
+            var count = 1;
+            
+            <div class="accordion accordion-flush ml-0" id="service_city">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse_city" aria-expanded="false" aria-controls="flush-collapse_@count">
+                            @ViewBag.City.Text
+                        </button>
+                    </h2>
+                    <div id="flush-collapse_city" class="accordion-collapse collapse" data-bs-parent="#service_city">
+                        <div class="accordion-body row col-12">
+                            @foreach (var service in ((IEnumerable<SelectListItem>)ViewBag.CiriestServices).Where(s => !Regex.IsMatch(s.Text, @"^\d+\..*")))
+                            {
+                                <div class="mt-3 col-12 col-md-4">
+                                    <div class="service_card p-4" data-id="@service.Value">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="#0C949A"/>
+                                        </svg>
+                                        @service.Text
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            foreach (var district in ViewBag.Districts)
+            {
+                <div class="accordion accordion-flush ml-0" id="service_@count">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse_@count" aria-expanded="false" aria-controls="flush-collapse_@count">
+                                @district.Text
+                            </button>
+                        </h2>
+                        <div id="flush-collapse_@count" class="accordion-collapse collapse" data-bs-parent="#service_@count">
+                            <div class="accordion-body row col-12">
+                                @foreach (var service in Model.Where(s => s.Text.Contains($"{count}.")))
+                                {
+                                    <div class="mt-3 col-12 col-md-4">
+                                        <div class="service_card p-4" data-id="@service.Value">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="#0C949A"/>
+                                            </svg>
+                                            @(count > 10 ? service.Text[3..] : service.Text[2..])
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                count++;
+            }
+        }
+        else
+        {
+            @foreach (var service in Model)
+            {
+                <div class="mt-3 col-12 col-md-4">
+                    <div class="service_card p-4" data-id="@service.Value">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="#0C949A"/>
+                        </svg>
+                        @service.Text
+                    </div>
+                </div>
+            }
         }
     </div>
 

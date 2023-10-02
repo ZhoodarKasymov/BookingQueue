@@ -32,7 +32,7 @@ public class ServicesService : IServicesService
         return await GetTimeWithPeriodAsync(dayOfWeekNumber, serviceId);
     }
 
-    public async Task<ICollection<Common.Models.Services>> GetAllActiveAsync()
+    public async Task<List<Common.Models.Services>> GetAllActiveAsync()
     {
         var query = @"SELECT s.id, s.name, sl.name as 'TranslatedName', s.deleted, sl.lang FROM services_langs sl
                         RIGHT JOIN services s ON s.id = sl.services_id
