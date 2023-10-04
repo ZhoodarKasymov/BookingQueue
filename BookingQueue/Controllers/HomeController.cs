@@ -1,8 +1,6 @@
-﻿using System.Globalization;
-using AspNetCore.ReCaptcha;
+﻿using AspNetCore.ReCaptcha;
 using BookingQueue.BLL.Resources;
 using BookingQueue.BLL.Services.Interfaces;
-using BookingQueue.Common.Models;
 using BookingQueue.Common.Models.ViewModels;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -58,30 +56,8 @@ public class HomeController : Controller
 
     public async Task<IActionResult> SelectServices()
     {
-        var ci = CultureInfo.CurrentCulture.Name;
         var activeServices = await _servicesService.GetAllActiveAsync();
-        var cityServices = new List<Services>(activeServices);
-
-        ViewBag.IsManyServices = activeServices.Any(s => s.Name.Contains("1."));
-
-        if (ViewBag.IsManyServices)
-        {
-            ViewBag.City = activeServices.Where(s => s.Name.Contains("город"))
-                .Select(s => new SelectListItem(ci == "uk" ? s.TranslatedName : s.Name, s.Id.ToString()))
-                .FirstOrDefault();
-
-            ViewBag.Districts = activeServices.Where(s => s.Name.Contains("район"))
-                .Select(s => new SelectListItem(ci == "uk" ? s.TranslatedName : s.Name, s.Id.ToString()));
-            
-            cityServices.RemoveAll(s => s.Name.Contains("город") || s.Name.Contains("район"));
-
-            ViewBag.CiriestServices = cityServices.Select(s => new SelectListItem(ci == "uk" ? s.TranslatedName : s.Name, s.Id.ToString()));
-        }
-
-        var services = activeServices
-            .Select(s => new SelectListItem(ci == "uk" ? s.TranslatedName : s.Name, s.Id.ToString()));
-        
-        return View(services);
+        return View(activeServices);
     }
 
     public async Task<List<SelectListItem>> GetTimeWithPeriodByDate(DateTime? bookingTime, long? serviceId)

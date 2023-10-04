@@ -10,6 +10,8 @@ public class Services
 
     [Column("name")]
     public string? Name { get; set; }
+    
+    public long? prent_id { get; set; }
 
     [Column("translated_name")]
     public string? TranslatedName { get; set; }
