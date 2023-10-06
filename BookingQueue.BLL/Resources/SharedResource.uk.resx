@@ -121,4 +121,7 @@
         <value>Тейлөө борбору
 Ош шаары боюнча ишкерлерге</value>
     </data>
+    <data name="Choose_date" xml:space="preserve">
+        <value>Күндү тандаңыз</value>
+    </data>
 </root>

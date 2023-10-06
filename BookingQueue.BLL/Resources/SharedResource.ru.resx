@@ -128,4 +128,7 @@
         <value>Центр обслуживания
 предпринимателей по г.Ош</value>
     </data>
+    <data name="Choose_date" xml:space="preserve">
+        <value>Выберите дату</value>
+    </data>
 </root>

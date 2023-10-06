@@ -148,7 +148,7 @@ body {
 }
 
 .service_card {
-  height: 70px;
+  min-height: 70px;
   background: #E5F3F4;
   font-size: 13px;
   font-style: normal;
@@ -162,9 +162,9 @@ body {
   height: 70px;
   width: 100%;
   min-width: 96% !important;
+  font-size: 13px;
   background: #E5F3F4;
   border: none;
-  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -345,4 +345,39 @@ body {
 
 .accordion-item {
   border-bottom: 1px solid #c7c8c9 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .data-label {
+    display: block !important;
+  }
+  
+  .custom-date-input {
+    position: relative;
+  }
+
+  .custom-date-input label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    pointer-events: none;
+    padding: 10px;
+    transition: 0.2s;
+    color: #999;
+  }
+
+  .custom-date-input input[type="date"]:focus + label,
+  .custom-date-input input[type="date"]:valid + label {
+    transform: translateY(-20px);
+    font-size: 13px;
+    color: #333;
+  }
+}
+
+.hide-important {
+  display: none !important;
+}
+
+.show-important {
+  display: block !important;
 }

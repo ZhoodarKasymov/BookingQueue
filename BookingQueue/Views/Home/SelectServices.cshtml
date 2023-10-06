@@ -1,5 +1,4 @@
 ﻿@using BookingQueue.Common.Models
-@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using System.Globalization
 @using Microsoft.AspNetCore.Html
 @model List<Services>
@@ -32,8 +31,9 @@
     </h5>
 
     <div class="row">
-        <div class="col-12 col-md-4 mt-3">
-            <input type="date" id="gns_date" class="p-4 date-time" onfocus="'showPicker' in this && this.showPicker()">
+        <div class="col-12 col-md-4 mt-3 custom-date-input">
+          <input type="date" id="gns_date" class="p-4 date-time" onfocus="'showPicker' in this && this.showPicker()">
+          <label style="display: none" class="data-label" for="gns_date">@Localization.GetLocalizedString("Choose_date")</label>
         </div>
 
         <div class="col-12 col-md-4 mt-3">
@@ -148,33 +148,40 @@
 
         return result;
     }
-
 }
 
 @section Scripts
 {
-    <script type="text/javascript">
+    <script type="text/javascript">    
+         var label = $('.data-label');
+    
         $('.service_card').click(function() {
           $('.service_card').removeClass('gns-service-card-active');
           $(this).addClass('gns-service-card-active');
           $('#gns_date').val("");
           $("#gns_time option").remove();
           $("#gns_time").append(`<option>${'@Localization.GetLocalizedString("Error_PleaseChooseDateBeforeTime")'}</option>`);
+          if ($(window).width() < 768) {
+               label.removeClass('hide-important');
+               label.addClass('show-important');
+           }
         });
         
         $('#gns_date').change(function(event){
-            let dataId = $('.gns-service-card-active').attr('data-id');
+            let dataId = $('.gns-service-card-active').attr('data-id');            
             let self = this;
             
              if (!dataId){
                  dangerAlert('@Localization.GetLocalizedString("Error_PleaseChooseServiceBeforeDate")');
                  event.preventDefault();
-                 $(self).val("");                 
+                 $(self).val("");
              }                 
              else {
                  let gnsDate = $('#gns_date').val();
                  
-                 if (gnsDate){
+                 if (gnsDate){     
+                       label.addClass('hide-important');
+                       label.removeClass('show-important');
                        showLoader();
                        let dateTime = new Date(gnsDate + ' ' + '00:00:00');
                     
@@ -197,7 +204,7 @@
                                 hideLoader();
                             }
                        });   
-                 }                 
+                 }
              }
         });
         
