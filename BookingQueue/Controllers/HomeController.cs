@@ -1,6 +1,8 @@
-﻿using AspNetCore.ReCaptcha;
+﻿using System.Globalization;
+using AspNetCore.ReCaptcha;
 using BookingQueue.BLL.Resources;
 using BookingQueue.BLL.Services.Interfaces;
+using BookingQueue.Common.Enums;
 using BookingQueue.Common.Models.ViewModels;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -94,20 +96,14 @@ public class HomeController : Controller
         return LocalRedirect(returnUrl);
     }
     
-    public IActionResult Privacy()
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult DownloadDocs(DocTypeEnum docType)
     {
-        var webRootPath = _hostEnvironment.WebRootPath;
-        var filePath = Path.Combine(webRootPath, "privacy\\privacy.pdf");
-        var contentType = "application/pdf";
+        var file = GetFileFromDocType(docType);
 
-        if (System.IO.File.Exists(filePath))
-        {
-            // Return the file to the client
-            return File(System.IO.File.OpenRead(filePath), contentType, "Документ условия и соглашения.pdf");
-        }
-
-        // Handle file not found scenario
-        return NotFound();
+        if (file is null) return NotFound();
+        
+        return file;
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -123,6 +119,32 @@ public class HomeController : Controller
         if (bookingDate is null) throw new Exception(_localization.GetLocalizedString("ChooseDateAndTimePlease"));
         
         if (serviceId is null) throw new Exception(_localization.GetLocalizedString("ChooseServicesPlease"));
+    }
+
+    private FileStreamResult? GetFileFromDocType(DocTypeEnum docType)
+    {
+        var isRus = string.Equals(CultureInfo.CurrentCulture.Name, "ru", StringComparison.OrdinalIgnoreCase);
+        var webRootPath = _hostEnvironment.WebRootPath;
+        string downloadFileText;
+        string filePath;
+
+        switch (docType)
+        {
+            case DocTypeEnum.Privacy:
+                filePath = Path.Combine(webRootPath, "documents\\privacy.pdf");
+                downloadFileText = "Документ условия и соглашения.pdf";
+                break;
+            case DocTypeEnum.InstructionForQueue:
+                filePath = Path.Combine(webRootPath, isRus ? "documents\\InstructionsRus.pdf" : "documents\\InstructionKG.pdf");
+                downloadFileText = $"{_localization.GetLocalizedString("Email_request")}.pdf";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(docType), docType, @"Документ для скачивания не найден");
+        }
+
+        return System.IO.File.Exists(filePath) 
+            ? File(System.IO.File.OpenRead(filePath), "application/pdf", downloadFileText) 
+            : null;
     }
 
     #endregion

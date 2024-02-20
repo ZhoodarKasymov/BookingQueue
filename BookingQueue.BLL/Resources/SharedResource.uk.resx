@@ -22,28 +22,28 @@
 Мамлекеттик салык кызматы</value>
     </data>
     <data name="Header_link_1" xml:space="preserve">
-        <value>Билим базасы</value>
+        <value>Салык кызматы жөнүндө</value>
     </data>
     <data name="Header_link_2" xml:space="preserve">
-        <value>Отчеттун формалары</value>
+        <value>Сервистер</value>
     </data>
     <data name="Header_link_3" xml:space="preserve">
-        <value>Электрондук сервистер</value>
+        <value>Отчёт формалары</value>
     </data>
     <data name="Header_link_4" xml:space="preserve">
-        <value>Салык кызматы жөнүндө</value>
+        <value>Билим базасы</value>
     </data>
     <data name="Header_link_5" xml:space="preserve">
         <value>Байланыштар</value>
     </data>
     <data name="Header_link_6" xml:space="preserve">
-        <value>Бош орундар</value>
+        <value>Пресс-борбор</value>
     </data>
     <data name="Header_path_link" xml:space="preserve">
         <value>Башкы бет</value>
     </data>
     <data name="Email_request" xml:space="preserve">
-        <value>Электрондук кайрылуу</value>
+        <value>Кезекке туруу боюнча көрсөтмөлөр</value>
     </data>
     <data name="HomePage_title" xml:space="preserve">
         <value>КР МСКнын алдын ала каттоо системасы</value>

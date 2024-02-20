@@ -28,29 +28,29 @@
         <value>Государственная налоговая служба при Министерстве финансов Кыргызской Республики</value>
     </data>
     <data name="Header_link_1" xml:space="preserve">
-        <value>База знаний</value>
+        <value>О налоговой службе</value>
     </data>
     <data name="Header_link_2" xml:space="preserve">
-        <value>Формы отчетов</value>
+        <value>Сервисы</value>
     </data>
     <data name="Header_link_3" xml:space="preserve">
-        <value>Электронные сервисы</value>
+        <value>Формы отчётов</value>
     </data>
     <data name="Header_link_4" xml:space="preserve">
-        <value>О налоговой службе</value>
+        <value>База знаний</value>
     </data>
     <data name="Header_link_5" xml:space="preserve">
         <value>Контакты
 </value>
     </data>
     <data name="Header_link_6" xml:space="preserve">
-        <value>Вакансии</value>
+        <value>Пресс-центр</value>
     </data>
     <data name="Header_path_link" xml:space="preserve">
         <value>Главная страница</value>
     </data>
     <data name="Email_request" xml:space="preserve">
-        <value>Электронное обращение</value>
+        <value>Инструкция как встать в очередь</value>
     </data>
     <data name="HomePage_title" xml:space="preserve">
         <value>Система предварительной записи ГНС КР</value>

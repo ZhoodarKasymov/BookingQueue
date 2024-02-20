@@ -61,7 +61,7 @@
         <div class="form-check">
             <input class="form-check-input custom-input-gns" type="checkbox" value="" id="invalidCheck" required>
             <label class="form-check-label" for="invalidCheck">
-                @Localization.GetLocalizedString("Agree") <a asp-area="" asp-controller="Home" asp-action="Privacy" target="_blank">@Localization.GetLocalizedString("WithPrivacy")</a>
+                @Localization.GetLocalizedString("Agree") <a asp-area="" asp-controller="Home" asp-action="DownloadDocs" asp-route-docType="Privacy" target="_blank">@Localization.GetLocalizedString("WithPrivacy")</a>
             </label>
             <div class="invalid-feedback">
                 @Localization.GetLocalizedString("Privacy_text")
